@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="addmask" version="1.1" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve" id="id_svgCanvas" style="fill: rgb(255, 255, 255);">
+<g class="addon_content">
+	<g>
+		<defs>
+			<path class="mask_container" id="55_arrow_down_mask" d="M-29.5-29.5v120h120v-120H-29.5z M30.5,40c-5.25,0-9.5-4.25-9.5-9.5s4.25-9.5,9.5-9.5s9.5,4.25,9.5,9.5    S35.75,40,30.5,40z" transform="translate(0,0)" style="fill: rgb(255, 255, 255);"></path>
+		</defs>
+		<clipPath id="55_arrow_down_mask_1_">
+			<use xlink:href="#55_arrow_down_mask" overflow="visible"></use>
+		</clipPath>
+		
+	</g>
+	<path id="55_arrow_down_addon" fill-rule="evenodd" clip-rule="evenodd" d="M30.5,22c-4.69,0-8.5,3.8-8.5,8.5c0,4.69,3.81,8.5,8.5,8.5  s8.5-3.81,8.5-8.5C39,25.8,35.19,22,30.5,22z M35.08,29.73l-4.2,6.069C30.8,35.92,30.65,36,30.5,36s-0.3-0.08-0.38-0.2l-4.2-6.069  c-0.1-0.141-0.11-0.33-0.03-0.48S26.13,29,26.3,29H29v-3h3v3h2.7c0.17,0,0.33,0.1,0.41,0.25S35.18,29.59,35.08,29.73z" style="fill: rgb(255, 255, 255);"></path>
+</g>
+<g id="55_arrow_down_icon_placeholder" clip-path="url(#55_arrow_down_mask_1_)">
+	<g class="icnplhld"><!--?xml version="1.0" encoding="utf-8"?-->
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<g xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve" class="svgmask" style="fill: rgb(224, 163, 10);">
+<g id="55552738_Shape_5_xA0_Clipping_Path_1_">
+	<g>
+		<path d="M16,34h8v-3h-8V34z M16,9h8V6h-8V9z M28,6v3h5v3h3V6H28z M7,16H4v8h3V16z M33,24h3v-8h-3V24z M7,28H4v6h8v-3H7V28z M33,31    h-5v3h8v-6h-3V31z M4,12h3V9h5V6H4V12z" style="fill: rgb(255, 255, 255);"></path>
+	</g>
+</g>
+</g></g>
+</g>
+</svg>

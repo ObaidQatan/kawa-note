@@ -1,0 +1,108 @@
+<style>
+    @font-face{
+        font-family: 'Nunito';
+        src: url('../src/fonts/Nunito/Nunito-Regular.ttf');
+    }
+    *{
+        transition: .3s;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        outline: none; 
+        font-family: Nunito, sans-serif;
+    }
+    body{
+        margin: 0;
+        border: rgb(185, 185, 185) solid 2px;
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+    .clicked-btn{
+        box-shadow: inset rgba(0, 0, 0, 0.459) 0px 0px 2px,
+                    inset rgba(0, 0, 0, 0.459) 0px 0px 2px !important;
+    }
+    .form input{
+        border: whitesmoke solid 2px;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 15px;
+        color: rgb(170, 170, 170);
+        background: white;
+        margin-block: 3px;
+        box-shadow: inset rgba(0, 0, 0, 0.18) 5px 5px 8px,
+                    inset rgba(0, 0, 0, 0.08) -2px -2px 5px;
+        
+    }
+    .form input:focus{
+        border: rgb(253, 130, 108) solid 2px;
+    }
+    .btn{
+        margin-block: 5px;
+        padding: 10px;
+        border-radius: 10px;
+        background: linear-gradient(-125deg, #ff5f6d, #ffc371);
+        color: white;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        box-shadow: inset rgba(255, 255, 255, 0.466) 3px 3px 10px,
+                    inset rgba(0, 0, 0, 0.226) -3px -3px 5px,
+                    rgba(0, 0, 0, 0.466) 2px 2px 5px;
+    }
+    .registered-user{
+        background: linear-gradient(100deg, #75c8ff, #1577b8);
+    }
+    .radio{
+        box-shadow: none !important;
+    }
+    </style>
+    <section style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: calc(100vh - 4px);
+    background-color: whitesmoke;
+    transition: .3s;
+    color: rgb(148, 148, 148);
+    overflow-x: hidden;
+    ">
+        <div style="
+        margin-bottom: 20px;
+        max-width: 90%;
+        ">
+            <img src="../src/assets/splash-icon.svg" style="
+            width: 100%;
+            margin-top: 20px;
+            " draggable="false">
+        </div>
+        
+        <h1>Register</h1>
+        <article class="form" style="
+        margin-block: 10px;
+        display: flex;
+        flex-direction: column;
+        ">
+            <input type="text" id="username" placeholder="Name..." spellcheck="false" autocomplete="off"/>
+            <input type="text" id="password" placeholder="Password..." spellcheck="false" autocomplete="off"/>
+            <input type="text" id="confirm-password" placeholder="Confirm Password..." spellcheck="false" autocomplete="off"/>
+            <div style="padding-block: 5px;">
+                Gender:
+                <input class="radio" type="radio" name="gender" value="male" checked/>Male
+                <input class="radio" type="radio" name="gender" value="female"/>Female
+            </div>
+            Date of Birth:
+            <input type="date" id="dob"/>
+            <button class="btn" onclick="
+            clickBtnEffect(event);
+            register();
+            ">Register</button>
+        </article>
+    
+        <button class="btn registered-user" onclick="
+        clickBtnEffect(event);
+        window.location.href = window.location.href.replace('/register.html', '/login.html');
+        ">Registered User</button>
+        
+    </section>
+    <script src="./register.js"></script>

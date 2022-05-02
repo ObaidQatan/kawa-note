@@ -1,38 +1,69 @@
-.App {
-  text-align: center;
+*{
+  transition: .3s;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color: whitesmoke;
+  border: rgb(185, 185, 185) solid 2px;
+  height: calc(100vh - 4px);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tool-bar{
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
   display: flex;
-  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  color: black;
+  border-radius: 0 0 20px 20px;
+  box-shadow: grey 0px 0px 5px;
+}
+.tool-bar .btn{
+  margin: 10px;
+  border-radius: 10px;
+  background: linear-gradient(125deg, #47bbff, #00ffff);
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  box-shadow: rgba(128, 128, 128, 0.43) 1px 1px 4px 1px;
+  cursor: pointer;
+  border-bottom: transparent solid 2px;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  display: flex;
+  width: 40px;
+  height: 40px;
+}
+.tool-bar .btn:hover{
+  border-bottom: #138bd1 solid 2px;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.tool-bar .close{
+  background: linear-gradient(125deg, #ff5100, #ffcd60);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tool-bar .close:hover{
+  border-bottom: #bb3b00 solid 2px;
+}
+.tool-bar .drag{
+  -webkit-app-region: drag;
+  position: absolute;
+  left: 0;
+  background: linear-gradient(125deg, #ff9100, #ffd828);
+  color: white;
+}
+.tool-bar .btn .icon{
+  width: 18px;
+}
+.tool-bar .close .icon{
+  opacity: .6;
+}
+.tool-bar .close:hover .icon{
+  opacity: 1;
 }
