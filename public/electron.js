@@ -31,3 +31,7 @@ ipcMain.on('tool-bar-action',(event, type)=>{
         getMainWindow().close();
     }
 })
+
+ipcMain.handle('register-user',(event,form)=>{
+    return "Succedded!"
+})
