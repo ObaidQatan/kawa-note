@@ -180,8 +180,23 @@
         flex-direction: column;
         ">
             <input type="text" id="username" placeholder="Name..." spellcheck="false" autocomplete="off"/>
-            <input type="text" id="password" placeholder="Password..." spellcheck="false" autocomplete="off"/>
-            <input type="text" id="confirm-password" placeholder="Confirm Password..." spellcheck="false" autocomplete="off"/>
+            <div style="display: flex;">
+                <input type="password" id="password" placeholder="Password..." spellcheck="false" autocomplete="off"/>
+                <span style="text-align: center; height: fit-content; align-self: center; width: 50px; padding: 5px 0; font-size: 12px;" onclick="
+
+                clickBtnEffect(event);
+                if(event.target.textContent.trim()==='show'){
+                    document.getElementById('password').setAttribute('type','text');
+                    document.getElementById('confirm-password').setAttribute('type','text');
+                    event.target.textContent = 'hide';
+                }else{
+                    document.getElementById('password').setAttribute('type','password');
+                    document.getElementById('confirm-password').setAttribute('type','password');
+                    event.target.textContent = 'show';
+                }
+                " class="btn">show</span>
+            </div>
+            <input type="password" id="confirm-password" placeholder="Confirm Password..." spellcheck="false" autocomplete="off"/>
             <div style="padding-block: 5px;">
                 Gender:
                 <input class="radio" type="radio" name="gender" value="male" checked/>Male

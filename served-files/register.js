@@ -33,9 +33,16 @@ function register(){
     disableBtn(registerBtn,"Loading");
 
     if(!(username&&password&&confirm_password&&gender&&dob)){
-        enableBtn(registerBtn,"Register")
-        return alert("All fields are mandatory");
+        enableBtn(registerBtn,"Register");
+        return ipcRenderer.send('alert',"All Fields Are Mandatory!");
     }
+
+    
+    if(password!==confirm_password){
+        enableBtn(registerBtn,"Register");
+        return ipcRenderer.send('alert',"Passwords do not match!");
+    }
+
 
     const form = {
         username,

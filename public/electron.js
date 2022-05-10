@@ -32,6 +32,9 @@ ipcMain.on('tool-bar-action',(event, type)=>{
     }
 })
 
-ipcMain.handle('register-user',(event,form)=>{
-    return "Succedded!"
-})
+ipcMain.on('alert',(event,message)=>{
+    dialog.showMessageBox({
+        type: 'info',
+        message: message
+    });
+});

@@ -1,5 +1,6 @@
-const { BrowserWindow, nativeImage } = require('electron');
+const { BrowserWindow, nativeImage, ipcMain } = require('electron');
 const path = require('path');
+const { registerUserController } = require('../controllers/registerUserController');
 let loginWindow;
 
 const createLoginWindow = ()=>{
@@ -34,6 +35,10 @@ const createLoginWindow = ()=>{
     loginWindow.on('closed', ()=>{
         loginWindow = null;
     });
+
+    ipcMain.handle('register-user',(event,form)=>{
+        registerUserController(form);
+    })
 }
 
 const isLoginWindow = ()=>{
