@@ -1,3 +1,5 @@
+const { utf8ToBase64, encodeToHex, encodeToNp } = require("../../helperFunctions/index");
+
 function registerUserController(form={
 //interface
     username: 'username value',
@@ -8,7 +10,7 @@ function registerUserController(form={
 }){
 
 //TODO: encodeCredintials()
-form.username = encodeToBase64(form.username);
+form.username = utf8ToBase64(form.username);
 form.gender = form.gender==='male'?'0':'1';
 form.dob = new Date(form.dob);
 form.password = encodeToNp(form.password);

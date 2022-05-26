@@ -1,4 +1,5 @@
 import { ipcRenderer } from "../Renderer";
+import React from 'react';
 
 import MaximizeIcon from '../assets/maximize.svg';
 import MinimizeIcon from '../assets/minimize.svg';

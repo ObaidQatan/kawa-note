@@ -1,3 +1,3 @@
-import { useDatePicker } from '../packages/np-date-picker.js';
+const { useDatePicker } = require('../packages/np-date-picker.js');
 
 useDatePicker('date-picker'); 
