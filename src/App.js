@@ -1,6 +1,5 @@
 import './App.css';
 import Toolbar from './components/Toolbar';
-import React from 'react';
 
 function App() {
 

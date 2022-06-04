@@ -1,15 +1,15 @@
 const { encode } = require("../packages/np-encode");
 
-module.exports = function utf8ToBase64(string){
+exports.utf8ToBase64 = function(string){
     return Buffer.from(string,'utf-8').toString('base64');
 }
 
 
-module.exports = function base64ToUtf8(string){
+exports.base64ToUtf8 = function(string){
     return Buffer.from(string,'base64').toString('utf-8');
 }
 
-module.exports = function getMsgTime(timestamp){
+exports.getMsgTime = function(timestamp){
     let hours = new Date(timestamp).getHours();
     let minutes = new Date(timestamp).getMinutes();
 
@@ -23,4 +23,6 @@ module.exports = function getMsgTime(timestamp){
     return `${hours}:${minutes} ${ampm}`;
 }
 
-module.exports = encodeNoNp = encode
+exports.encodeToNp = function(str){
+  return encode(str);  
+} 

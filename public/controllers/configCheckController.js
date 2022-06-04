@@ -1,26 +1,17 @@
 const { dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
-
-function fileExists(filePath){
-    try {
-        if(fs.existsSync(filePath)){
-            return true;
-        }else{
-            return false;
-        }
-    } catch (error) {
-        dialog.showErrorBox('Something Went Wrong!', error.message);
-    }
-}
+const JSONStorage = require('../../packages/JSONStorage');
 
 const configCheckController = ()=>{
-    if(fileExists(path.join(__dirname, '../../.kawa.config'))){
+    //TODO: Solve the issue of configering file name...............................
+    //NOTE: To solve this issue, there must be a config file to direct the process '.kawa.config'
+    
+    if(JSONStorage.fileExists(path.join(__dirname, `../../${process.env.CONFIG_FILENAME}`))){
         //TODO: retrive configs from .kawa.config
-        let configString = fs.readFileSync(path.join(__dirname, '../../.kawa.config'), 'utf8');
         let configs;
         try {
-            configs = JSON.parse(configString);
+            configs = JSONStorage.readData(path.join(__dirname, `../../${process.env.CONFIG_FILENAME}`));
         } catch (error) {
             return false;
         }
@@ -33,7 +24,7 @@ const configCheckController = ()=>{
             //TODO: else --> login()
     }else{
         //TODO: create .kawa.config
-        fs.writeFileSync(path.join(__dirname, '../../.kawa.config'), '{}');
+        new JSONStorage(path.join(__dirname, `../../${process.env.CONFIG_FILENAME}`));
         //TODO: login()
         return false;
     }

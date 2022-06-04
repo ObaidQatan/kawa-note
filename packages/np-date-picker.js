@@ -1,4 +1,4 @@
-async function useDatePicker(elementClassName){
+export async function useDatePicker(elementClassName){
     //Target Element
     const datePicker = document.querySelector(`.${elementClassName}`);
 
@@ -567,5 +567,3 @@ async function useDatePicker(elementClassName){
         reInintilizeData();
     });
 }
-
-module.exports = {useDatePicker}

@@ -20,6 +20,7 @@ app.on('window-all-closed', ()=>{
     }
 });
 
+//NOTE: Toolbar Actions Handler
 ipcMain.on('tool-bar-action',(event, type)=>{
     if(type === 'adjust'){
         getMainWindow().unmaximize();
@@ -32,9 +33,18 @@ ipcMain.on('tool-bar-action',(event, type)=>{
     }
 })
 
+//NOTE: Alert Event Handler
 ipcMain.on('alert',(event,message)=>{
     dialog.showMessageBox({
         type: 'info',
         message: message
+    });
+});
+
+//NOTE: Error Event Handler
+ipcMain.on('error',(event,err)=>{
+    dialog.showMessageBox({
+        type: 'error',
+        message: err?.toString()
     });
 });

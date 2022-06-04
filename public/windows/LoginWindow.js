@@ -37,7 +37,7 @@ const createLoginWindow = ()=>{
     });
 
     ipcMain.handle('register-user',(event,form)=>{
-        registerUserController(form);
+        return registerUserController(form);
     })
 }
 

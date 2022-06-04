@@ -54,5 +54,9 @@ function register(){
 
     ipcRenderer.invoke('register-user',form).then(res=>{
        disableBtn(registerBtn,"Registered")
+    }).catch(e=>{
+        enableBtn(registerBtn, "Register");
+        ipcRenderer.send('error',e);
+        return console.log(e);
     })
 }
