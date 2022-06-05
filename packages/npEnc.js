@@ -3,6 +3,8 @@ Availaible chars for a string input sample:
 [aA-zZ] , [0 - 9] , { (  )  !  @  #  $  %  &  *  =  .  , space newLine }
  */
 exports.encode = function encode(str){
+    if(!str)
+        return null;
     let pattern="".split();
     let patternCounter=0;
 

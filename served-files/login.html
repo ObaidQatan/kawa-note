@@ -81,8 +81,21 @@ overflow-x: hidden;
     flex-direction: column;
     ">
         <input type="text" id="username" placeholder="Name..." spellcheck="false" autocomplete="off"/>
-        <input type="text" id="password" placeholder="Password..." spellcheck="false" autocomplete="off"/>
-        <button class="btn" onclick="
+        <div style="display: flex;">
+            <input type="password" id="password" placeholder="Password..." spellcheck="false" autocomplete="off"/>
+            <span style="text-align: center; height: fit-content; align-self: center; width: 50px; padding: 5px 0; font-size: 12px;" onclick="
+
+            clickBtnEffect(event);
+            if(event.target.textContent.trim()==='show'){
+                document.getElementById('password').setAttribute('type','text');
+                event.target.textContent = 'hide';
+            }else{
+                document.getElementById('password').setAttribute('type','password');
+                event.target.textContent = 'show';
+            }
+            " class="btn">show</span>
+        </div>
+        <button id="login-btn" class="btn" onclick="
         clickBtnEffect(event);
         login();
         ">Login</button>

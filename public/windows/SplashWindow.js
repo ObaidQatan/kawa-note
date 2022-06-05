@@ -3,6 +3,7 @@ const path = require('path');
 const { configCheckController } = require('../controllers/configCheckController');
 const { createMainWindow } = require('./MainWindow');
 const { createLoginWindow } = require('./LoginWindow');
+const { createPasswordWindow } = require('./PasswordWindow');
 let splashWindow;
 
 const createSplashWindow = ()=>{
@@ -42,7 +43,8 @@ const createSplashWindow = ()=>{
     setTimeout(() => {
         if(valid){
             splashWindow.close();
-            createMainWindow();
+
+            createPasswordWindow();
         }else{
             splashWindow.close();
             createLoginWindow();

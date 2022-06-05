@@ -1,5 +1,6 @@
 const { app, ipcMain, dialog } = require('electron');
 const path = require('path');
+require('dotenv').config();
 const { isMainWindow, getMainWindow } = require('./windows/MainWindow');
 const { createSplashWindow, isSplashWindow, getSplashWindow } = require('./windows/SplashWindow');
 app.isPackaged || require('electron-reloader')(module)
@@ -37,7 +38,7 @@ ipcMain.on('tool-bar-action',(event, type)=>{
 ipcMain.on('alert',(event,message)=>{
     dialog.showMessageBox({
         type: 'info',
-        message: message
+        message: message?.toString()
     });
 });
 
@@ -46,5 +47,23 @@ ipcMain.on('error',(event,err)=>{
     dialog.showMessageBox({
         type: 'error',
         message: err?.toString()
+    });
+});
+
+ipcMain.handle('error-sync',(event,err)=>{
+    dialog.showMessageBox({
+        type: 'error',
+        message: err?.toString()
+    }).then((btn_index)=>{
+        return btn_index;
+    });
+});
+
+ipcMain.handle('alert-sync',(event,message)=>{
+    dialog.showMessageBox({
+        type: 'info',
+        message: message?.toString()
+    }).then((btn_index)=>{
+        return btn_index;
     });
 });

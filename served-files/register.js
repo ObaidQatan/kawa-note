@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+const { reformErrorMessage } = require("../packages/helper-functions");
 
 
 const clickBtnEffect = (e)=>{
@@ -56,7 +57,7 @@ function register(){
        disableBtn(registerBtn,"Registered")
     }).catch(e=>{
         enableBtn(registerBtn, "Register");
-        ipcRenderer.send('error',e);
+        ipcRenderer.send('error',reformErrorMessage(e,'register-user'));
         return console.log(e);
     })
 }
