@@ -1,6 +1,6 @@
 const { ipcRenderer } = require("electron/renderer");
 const path = require('path');
-const { encodeToBase64, encodeToNp, cipher } = require("../../packages/helper-functions");
+const { encodeToBase64, encodeToNp, cipher, encodeUserConfigFileName, getUsernameFromConfigFileName } = require("../../packages/helper-functions");
 const JSONStorage = require("../../packages/JSONStorage");
 
 function registerUserController(form){
@@ -42,10 +42,16 @@ try {
 
 //TODO: create storage
 //TODO: If username already exists --> return error
-if(JSONStorage.fileExists(path.join(__dirname, `../../${'.'+username+process.env.CONFIG_FILENAME}`)))
+let fileName = encodeUserConfigFileName(username);
+
+/**NOTE: For backtracking
+ * 
+ */
+
+if(JSONStorage.fileExists(path.join(__dirname, `../../.${fileName}`)))
     throw new Error("A user with the same username already exists!/nPlease try another username.");
 
-var storage = new JSONStorage(path.join(__dirname, `../../${'.'+username+process.env.CONFIG_FILENAME}`),true);
+var storage = new JSONStorage(path.join(__dirname, `../../.${fileName}`),true);
 
 //NOTE: Registration will creates a new config for the user .username.kawa.config and if already exists --> reject()
 let data = {};

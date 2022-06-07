@@ -1,6 +1,6 @@
 const encode = require('../packages/npEnc.js').encode;
 const crypto = require('crypto');
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, BrowserWindow } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { decode } = require('../packages/npEnc.js');
@@ -98,7 +98,7 @@ function deleteUserConfig(user_config_file_name){
 function updateFlowConfig(user){
     let configs = {};
     if(user){
-        configs.user_config_file_name = encodeToBase64(encodeToNp(encodeToBase64(`.${user.username}${process.env.CONFIG_FILENAME}`)));
+        configs.user_config_file_name = encodeToBase64(encodeToNp(encodeToBase64(`.${encodeUserConfigFileName(user.username)}`)));
         configs.remember_me = true;
     }
     
@@ -121,6 +121,35 @@ function reformErrorMessage(error, channel){
     return `${error}`.replace(`Error: Error invoking remote method '${channel}':`,"").trim();
 }
 
+function removeCurrentUserConfigs(){
+    //TODO: remove current user configs
+    //NOTE: For now. it is only done bt removing .kawa.config file
+    if(JSONStorage.fileExists(path.join(__dirname, `../${process.env.CONFIG_FILENAME}`))){
+        fs.unlinkSync(path.join(__dirname, `../${process.env.CONFIG_FILENAME}`));
+    }
+    return true;
+}
+
+function encodeUserConfigFileName(username){
+    let encodingPassword = encodeToBase64(process.env.CTYPTO_SECRET_KEY);
+    let editedUsername = `${encodingPassword.substring(0, encodingPassword.length/2)}${username}${encodingPassword.substring(encodingPassword.length/2 +1, encodingPassword.length)}`;
+    editedUsername = encodeToBase64(editedUsername);
+    return editedUsername;
+}
+
+function getUsernameFromConfigFileName(filename){
+    filename = decodeFromBase64(filename);
+    let encodedPassword = encodeToBase64(process.env.CTYPTO_SECRET_KEY);
+    filename = filename.substring(encodedPassword.length/2, filename.length - encodedPassword.length/2 +1);
+    return filename;
+}
+
+function closeAllWindows(){
+    BrowserWindow.getAllWindows().forEach((window)=>{
+        window.close();
+    });
+}
+
 module.exports = {
     encodeToBase64,
     encodeToNp,
@@ -132,5 +161,9 @@ module.exports = {
     retriveUser,
     deleteUserConfig,
     updateFlowConfig,
-    reformErrorMessage
+    reformErrorMessage,
+    removeCurrentUserConfigs,
+    encodeUserConfigFileName,
+    getUsernameFromConfigFileName,
+    closeAllWindows
 };

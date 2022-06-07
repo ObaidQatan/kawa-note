@@ -35,7 +35,7 @@ const createSplashWindow = ()=>{
     // splashWindow.loadURL(`file://${path.join(__dirname, '../../build/index.html')}`);
 
     splashWindow.on('closed', ()=>{
-        splashWindow = null;
+        splashWindow.destroy();
     });
 
     //chechk if the config file exists

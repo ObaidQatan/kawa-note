@@ -27,14 +27,14 @@ const createPasswordWindow = ()=>{
     // passwordWindow.maximize();
     passwordWindow.setIcon(nativeImage.createFromPath(path.join(__dirname, '../logo192.png')));
     // Open the DevTools.
-    passwordWindow.webContents.openDevTools();
+    // passwordWindow.webContents.openDevTools();
 
     // and load the index.html of the app.
     passwordWindow.loadURL(`file://${path.join(__dirname, '../../served-files/password.html')}`);
     // passwordWindow.loadURL(`file://${path.join(__dirname, '../../build/index.html')}`);
 
     passwordWindow.on('closed', ()=>{
-        passwordWindow = null;
+        passwordWindow.destroy();
     });
 
     ipcMain.handle('validate-password',(event,password)=>{
@@ -45,11 +45,12 @@ const createPasswordWindow = ()=>{
         return user;
     });
 
-    ipcMain.on('pass-user',(event,user)=>{
+    ipcMain.on('pass-user:password-window',(event,user)=>{
         passwordWindow.close();
 
         createMainWindow();
     });
+
 }
 
 const isPasswordWindow = ()=>{

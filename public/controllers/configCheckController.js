@@ -35,9 +35,15 @@ const configCheckController = ()=>{
         } catch (error) {
             return false;
         }
+
+        let user_config_file_name;
         
-        let user_config_file_name = decodeFromBase64(decodeFromNp(decodeFromBase64(configs.user_config_file_name)));
-        if(!(user_config_file_name && configs.remember_me)){
+        try {
+            user_config_file_name = decodeFromBase64(decodeFromNp(decodeFromBase64(configs.user_config_file_name)));
+            if(!(user_config_file_name && configs.remember_me)){
+                return false;
+            }
+        } catch (error) {
             return false;
         }
 

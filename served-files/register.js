@@ -9,6 +9,14 @@ const clickBtnEffect = (e)=>{
     }, 90);
 }
 
+const closeWindow = (delay)=>{
+    if(!delay)
+        delay = 0;
+    setTimeout(()=>{
+        ipcRenderer.send('close');
+    },delay);
+}
+
 function disableBtn(btnNode,textContent){
     btnNode.disabled = true;
     if(!textContent)
@@ -55,6 +63,24 @@ function register(){
 
     ipcRenderer.invoke('register-user',form).then(res=>{
        disableBtn(registerBtn,"Registered")
+       ipcRenderer.invoke('login-user',
+       {
+           username:form.username,
+           password:form.password
+        }
+        ).then(user=>{
+        if(!user){
+            window.location.href = window.location.href.replace('/register.html', '/login.html');
+        }
+        disableBtn(registerBtn,"Welcome!");
+        
+        ipcRenderer.send('pass-user:login-window',JSON.stringify(user));
+     }).catch(e=>{
+         enableBtn(registerBtn, "Login");
+         ipcRenderer.send('error',reformErrorMessage(e,'login-user'));
+         return console.log(e);
+     })
+        //
     }).catch(e=>{
         enableBtn(registerBtn, "Register");
         ipcRenderer.send('error',reformErrorMessage(e,'register-user'));

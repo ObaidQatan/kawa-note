@@ -1,4 +1,4 @@
-const { retriveUser } = require("../../packages/helper-functions")
+const { retriveUser, encodeUserConfigFileName } = require("../../packages/helper-functions")
 
 
 function loginUserController(form){
@@ -8,8 +8,7 @@ function loginUserController(form){
     //    3. If valid, check if username from the file name is the same as the encoded username in it
     //    4. If same --> pass()
     //    5. If not same --> login()
-
-    let user = retriveUser(`.${form.username}${process.env.CONFIG_FILENAME}`);
+    let user = retriveUser(`.${encodeUserConfigFileName(form.username)}`);
     if(!user)
         throw new Error("You are not registered with this username yet!");
     

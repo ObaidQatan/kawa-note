@@ -2,10 +2,18 @@ const { ipcRenderer } = require("electron");
 const { reformErrorMessage } = require("../packages/helper-functions");
 
 const clickBtnEffect = (e)=>{
-    e.target.classList.toggle('clicked-btn');
+    e.target.classList.toggle('clicked-btn'); //300ms
     setTimeout(() => {
-        e.target.classList.toggle('clicked-btn');
-    }, 90);
+        e.target.classList.toggle('clicked-btn'); //300ms
+    }, 90); //90ms
+}
+
+const closeWindow = (delay)=>{
+    if(!delay)
+        delay = 0;
+    setTimeout(()=>{
+        ipcRenderer.send('close');
+    },delay);
 }
 
 function disableBtn(btnNode,textContent){
@@ -63,9 +71,8 @@ const login = ()=>{
             });
         }
         disableBtn(login_btn,"Welcome!");
-        console.log(user);
         
-        ipcRenderer.send('pass-user',JSON.stringify(user));
+        ipcRenderer.send('pass-user:login-window',JSON.stringify(user));
      }).catch(e=>{
          enableBtn(login_btn, "Login");
          ipcRenderer.send('error',reformErrorMessage(e,'login-user'));

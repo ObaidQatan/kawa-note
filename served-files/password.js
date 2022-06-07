@@ -8,6 +8,14 @@ const clickBtnEffect = (e)=>{
     }, 90);
 }
 
+const closeWindow = (delay)=>{
+    if(!delay)
+        delay = 0;
+    setTimeout(()=>{
+        ipcRenderer.send('close');
+    },delay);
+}
+
 function disableBtn(btnNode,textContent){
     btnNode.disabled = true;
     if(!textContent)
@@ -37,10 +45,22 @@ const enter = ()=>{
         disableBtn(enter_btn,"Welcome!");
         console.log(res);
         
-        ipcRenderer.send('pass-user',JSON.stringify(res));
+        ipcRenderer.send('pass-user:password-window',JSON.stringify(res));
      }).catch(e=>{
          enableBtn(enter_btn, "Enter");
          ipcRenderer.send('error',reformErrorMessage(e,'validate-password'));
          return console.log(e);
      })
+}
+
+const logout = ()=>{
+    ipcRenderer.invoke('remove-user').then(isRemoved=>{
+        if(isRemoved)
+            ipcRenderer.send('logout');
+        else
+            ipcRenderer.send('error',"Logout Failed!");
+    }).catch(e=>{
+        ipcRenderer.send('error',reformErrorMessage(e,'remove-user'));
+        return console.log(e);
+    });
 }

@@ -1,7 +1,8 @@
 const { app, ipcMain, dialog } = require('electron');
-const path = require('path');
+const { removeCurrentUserConfigs, closeAllWindows } = require('../packages/helper-functions');
 require('dotenv').config();
-const { isMainWindow, getMainWindow } = require('./windows/MainWindow');
+const { isMainWindow, getMainWindow, createMainWindow } = require('./windows/MainWindow');
+const { createPasswordWindow } = require('./windows/PasswordWindow');
 const { createSplashWindow, isSplashWindow, getSplashWindow } = require('./windows/SplashWindow');
 app.isPackaged || require('electron-reloader')(module)
 
@@ -10,7 +11,7 @@ app.whenReady().then(()=>{
 });
 
 app.on('activate', ()=>{
-    if(!isSplashWindow){
+    if(!isSplashWindow()){
         createSplashWindow();
     }
 });
@@ -30,9 +31,11 @@ ipcMain.on('tool-bar-action',(event, type)=>{
     }else if(type === 'maximize'){
         getMainWindow().maximize();
     }else if(type === 'close'){
-        getMainWindow().close();
+        app.quit();
     }
 })
+
+ipcMain.on('close',()=>app.quit());
 
 //NOTE: Alert Event Handler
 ipcMain.on('alert',(event,message)=>{
@@ -66,4 +69,13 @@ ipcMain.handle('alert-sync',(event,message)=>{
     }).then((btn_index)=>{
         return btn_index;
     });
+});
+
+ipcMain.handle('remove-user',(event)=>{
+    return removeCurrentUserConfigs();
+});
+
+ipcMain.on('logout',(event)=>{
+    closeAllWindows();
+    createSplashWindow();
 });

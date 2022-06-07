@@ -30,14 +30,14 @@ const createLoginWindow = ()=>{
     // loginWindow.maximize();
     loginWindow.setIcon(nativeImage.createFromPath(path.join(__dirname, '../logo192.png')));
     // Open the DevTools.
-    loginWindow.webContents.openDevTools();
+    // loginWindow.webContents.openDevTools();
 
     // and load the index.html of the app.
     loginWindow.loadURL(`file://${path.join(__dirname, '../../served-files/login.html')}`);
     // loginWindow.loadURL(`file://${path.join(__dirname, '../../build/index.html')}`);
 
     loginWindow.on('closed', ()=>{
-        loginWindow = null;
+        loginWindow.destroy();
     });
 
     ipcMain.handle('register-user',(event,form)=>{
@@ -52,7 +52,7 @@ const createLoginWindow = ()=>{
         return user;
     });
 
-    ipcMain.on('pass-user',(event,user)=>{
+    ipcMain.on('pass-user:login-window',(event,user)=>{
         loginWindow.close();
 
         createMainWindow();
